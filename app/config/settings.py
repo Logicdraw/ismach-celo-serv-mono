@@ -148,34 +148,33 @@ class Settings(BaseSettings):
 
 	# CELO_RED_POCKET_LINK: str = os.environ['CELO_RED_POCKET_LINK']
 
-
-	USER_1_USERNAME: str = os.environ['USER_1_USERNAME']
-	USER_1_EMAIL: str = os.environ['USER_1_EMAIL']
-	USER_1_PASSWORD: SecretStr = os.environ['USER_1_PASSWORD']
-
-	USER_2_USERNAME: str = os.environ['USER_2_USERNAME']
-	USER_2_EMAIL: str = os.environ['USER_2_EMAIL']
-	USER_2_PASSWORD: SecretStr = os.environ['USER_2_PASSWORD']
-
-	USER_3_USERNAME: str = os.environ['USER_3_USERNAME']
-	USER_3_EMAIL: str = os.environ['USER_3_EMAIL']
-	USER_3_PASSWORD: SecretStr = os.environ['USER_3_PASSWORD']
-
-	USER_4_USERNAME: str = os.environ['USER_4_USERNAME']
-	USER_4_EMAIL: str = os.environ['USER_4_EMAIL']
-	USER_4_PASSWORD: SecretStr = os.environ['USER_4_PASSWORD']
-
-	USER_5_USERNAME: str = os.environ['USER_5_USERNAME']
-	USER_5_EMAIL: str = os.environ['USER_5_EMAIL']
-	USER_5_PASSWORD: SecretStr = os.environ['USER_5_PASSWORD']
-
-	USER_6_USERNAME: str = os.environ['USER_6_USERNAME']
-	USER_6_EMAIL: str = os.environ['USER_6_EMAIL']
-	USER_6_PASSWORD: SecretStr = os.environ['USER_6_PASSWORD']
-
-
 	if in_local:
-		pass
+		
+		USER_1_USERNAME: str = os.environ['USER_1_USERNAME']
+		USER_1_EMAIL: str = os.environ['USER_1_EMAIL']
+		USER_1_PASSWORD: SecretStr = os.environ['USER_1_PASSWORD']
+
+		USER_2_USERNAME: str = os.environ['USER_2_USERNAME']
+		USER_2_EMAIL: str = os.environ['USER_2_EMAIL']
+		USER_2_PASSWORD: SecretStr = os.environ['USER_2_PASSWORD']
+
+		USER_3_USERNAME: str = os.environ['USER_3_USERNAME']
+		USER_3_EMAIL: str = os.environ['USER_3_EMAIL']
+		USER_3_PASSWORD: SecretStr = os.environ['USER_3_PASSWORD']
+
+		USER_4_USERNAME: str = os.environ['USER_4_USERNAME']
+		USER_4_EMAIL: str = os.environ['USER_4_EMAIL']
+		USER_4_PASSWORD: SecretStr = os.environ['USER_4_PASSWORD']
+
+		USER_5_USERNAME: str = os.environ['USER_5_USERNAME']
+		USER_5_EMAIL: str = os.environ['USER_5_EMAIL']
+		USER_5_PASSWORD: SecretStr = os.environ['USER_5_PASSWORD']
+
+		USER_6_USERNAME: str = os.environ['USER_6_USERNAME']
+		USER_6_EMAIL: str = os.environ['USER_6_EMAIL']
+		USER_6_PASSWORD: SecretStr = os.environ['USER_6_PASSWORD']
+
+
 
 
 	if in_dev:
