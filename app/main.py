@@ -32,6 +32,9 @@ from raven import Client
 import os
 
 
+# from app.database.client import mongo_client
+
+
 
 
 
@@ -42,7 +45,7 @@ async def on_startup():
 
 async def on_shutdown():
 	logger.info('FASTAPI APP SHUTDOWN!')
-
+	# mongo_client.close()
 
 
 
