@@ -28,20 +28,21 @@ load_dotenv()
 
 
 
-if 'VERCEL' in os.environ:
-	in_prod = (os.environ['VERCEL_ENV'] == 'production')
-	in_staging = (os.environ['VERCEL_ENV'] == 'preview')
-	in_server = True
-else:
-	in_prod = in_staging = in_server = False
+in_staging = (os.getenv('IS_PULL_REQUEST') or False) # RENDER.COM
 
+in_prod = ('PRODUCTION' in os.environ) and not in_staging
 
 in_testing = ('TESTING' in os.environ)
 
+in_dev = not (in_prod or in_staging or in_testing)
+
+
+
+
+in_server = in_prod or in_staging
 
 in_local = not in_server
 
-in_dev = in_local and not in_testing
 
 
 
@@ -78,6 +79,7 @@ class Settings(BaseSettings):
 		'http://localhost:3000',
 		'http://localhost:5000',
 		# --
+		'https://ismach-celo-front-web.vercel.app',
 	]
 
 
