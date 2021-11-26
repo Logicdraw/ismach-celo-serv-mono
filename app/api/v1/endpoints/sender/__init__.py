@@ -33,17 +33,21 @@ from pymongo import MongoClient
 router = APIRouter()
 
 
+import string
 
-# from app.config.settings import settings
-
-# from celo_sdk.kit import Kit
-
-
-# kit = Kit('https://alfajores-forno.celo-testnet.org')
+import random
 
 
 
-# escrow_contract = kit.base_wrapper.create_and_get_contract_by_name('Escrow')
+from app.utils.celo import kit
+
+
+
+
+def generator(size=8, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
+	# --
+
+	return ''.join(random.choice(chars) for _ in range(size))
 
 
 
@@ -61,90 +65,26 @@ def create_pocket_test(
 	# --
 
 	try:
-		# web3 my contract
-		pass
+		kit.wallet_change_account = settings.CELO_ADDRESS_1
+		celo_amount = kit.w3.toWei(pocket_in.celo_value_amount, 'ether')
+		tx_hash = gold_token.transfer(settings.CELO_ADDRESS_1, celo_amount)
 	except:
 		raise HTTPException(
 			status=500,
 			detail='Not working!',
 		)
 
+	pocket_in.initial_txn = tx_hash
+
+	slug = generator()
+	pocket_in.generated_slug = slug
+
 	db['main']['pockets'].insert_one(pocket_in.to_dict())
 
-	# need to generate link!
 
 	return {
-		'msg': 'Text!',
+		'link': f'{slug}',
 	}
-
-
-
-
-
-
-# @router.post(
-# 	'/red-pockets',
-# )
-# def create_red_pocket(
-# 	request: Request,
-# 	# *,
-# 	# ---
-# ) -> Any:
-# 	# --
-
-# 	escrow_contract.transfer()
-
-
-# 	return {
-# 		'msg': 'Text!',
-# 	}
-
-
-
-
-# route:
-
-# -- create a payment!
-
-
-# -- receive a payment (no address just yet!)
-
-
-
-
-
-
-# what sort of payments.
-
-
-
-
-# ---
-# ...
-
-
-
-
-# @router.post(
-# 	'/',
-# )
-# @limiter.limit('120/minute')
-
-
-
-
-# @router.get(
-# 	'/link/{link}',
-# )
-# def read_link(
-# 	request: Request,
-# 	*,
-# 	link: str,
-# ) -> Any:
-# 	# --
-# 	pass
-
-
 
 
 

@@ -17,7 +17,9 @@ class PocketSchemaBase(BaseModel):
 	user_id: Optional[str] = None
 	celo_value_amount: Optional[float] = None
 	recipients_amount: Optional[int] = None
-	txns: Optional[dict] = None
+	initial_txn: Optional[str] = None
+	txns: Optional[dict] = None # {user_id: txn_hash}
+	generated_slug: Optional[str] = None
 
 
 
