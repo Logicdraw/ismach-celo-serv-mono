@@ -19,6 +19,9 @@ from app.config.settings import settings
 from app.extensions import limiter
 
 
+from pymongo import MongoClient
+
+
 
 router = APIRouter()
 

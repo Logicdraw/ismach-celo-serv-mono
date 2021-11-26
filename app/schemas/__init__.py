@@ -1,9 +1,9 @@
-# from app.schemas.pocket import (
-# 	PocketSchemaCreate,
-# 	PocketSchemaUpdate,
-# 	PocketSchema,
-# 	PocketSchemaInDB,
-# )
+from app.schemas.pocket import (
+	PocketSchemaCreate,
+	PocketSchemaUpdate,
+	PocketSchema,
+	PocketSchemaInDB,
+)
 
 from app.schemas.user import (
 	UserSchemaCreate,
