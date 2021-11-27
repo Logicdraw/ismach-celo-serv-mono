@@ -83,7 +83,7 @@ def collect_pocket_payment(
 	)
 
 
-	celo_value_amount = 1
+	celo_value_amount = pocket['celo_value_amount'] * 0.5
 
 	try:
 		kit.wallet_change_account = settings.CELO_ADDRESS_2
