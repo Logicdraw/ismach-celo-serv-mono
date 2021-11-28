@@ -22,6 +22,9 @@ from pymongo import MongoClient
 from app.config.settings import settings
 
 
+from app.database.client import mongo_client
+
+
 
 token_bearer = OAuth2PasswordBearer(
 	tokenUrl='/_auth/login/access-token',
