@@ -66,7 +66,7 @@ class UsersCRUD:
 
 		user = self.get_by_username(
 			db=db,
-			email=email,
+			username=username,
 		)
 
 		if not user:
