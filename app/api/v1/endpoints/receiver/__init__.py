@@ -111,6 +111,9 @@ async def collect_pocket_payment(
 
 	celo_value_amount = a_b * (minutes / 60)
 
+	print('MMMAO')
+	print(celo_value_amount)
+
 
 	# if (number_of_already_recipients + 1) == (pocket['recipients_amount']):
 	# 	already_celo_value_amount = 0
@@ -147,7 +150,12 @@ async def collect_pocket_payment(
 		# kit.wallet.sign_with_provider = True
 		kit.wallet_change_account = settings.CELO_ADDRESS_2
 		celo_amount = kit.w3.toWei(celo_value_amount, 'ether')
-		tx_hash = gold_token.transfer(user['celo_address'], celo_amount)
+		print('UUU')
+		print(celo_amount)
+		print('JJJW')
+		balance = gold_token.balance_of(settings.CELO_ADDRESS_2)
+		print(balance)
+		tx_hash = gold_token.transfer(settings.CELO_ADDRESS_3, celo_amount)
 	except Exception as err:
 		print('errrrr::')
 		print(err)
@@ -158,17 +166,17 @@ async def collect_pocket_payment(
 
 	
 	pocket['txns'][str(user['_id'])] = tx_hash
-	new_pocket_txns = pocket['txns']
+	new_pocket_txns = { "$set": {'txns': pocket['txns']} }
 
 
 	db['main']['pockets'].update_one(
 		{'generated_slug': slug},
-		{new_pocket_txns}
+		new_pocket_txns,
 	)
 
 
 	return {
-		'amount': celo_value_amount,
+		'amount': celo_amount,
 	}
 
 
