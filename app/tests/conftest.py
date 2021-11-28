@@ -40,6 +40,9 @@ from app.database.helpers import (
 )
 
 
+from app.api.deps import get_db
+
+
 from pymongo import MongoClient
 
 # --
@@ -62,6 +65,14 @@ def db(connection):
 	yield connection
 	reset_database(connection, mongo_database_name='main')
 
+
+
+
+@pytest.fixture(autouse=True)
+def override_dependency(db: MongoClient):
+	# --
+
+	app.dependency_overrides[get_db] = lambda: db
 
 
 

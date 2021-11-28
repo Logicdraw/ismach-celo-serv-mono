@@ -18,7 +18,7 @@ class UserSchemaBase(BaseModel):
 	username: Optional[str] = None
 	celo_address: Optional[str] = None
 	password: Optional[str] = None
-
+	active: Optional[bool] = None
 
 
 

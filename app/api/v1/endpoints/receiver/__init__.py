@@ -30,12 +30,17 @@ from pymongo import MongoClient
 import datetime
 
 
+import pytz
+
+
 
 router = APIRouter()
 
 
 
 from app.utils.celo import kit, gold_token
+
+
 
 
 
@@ -55,6 +60,8 @@ async def collect_pocket_payment(
 	pocket = db['main']['pockets'].find_one(
 		{'generated_slug': slug}
 	)
+
+	print(pocket)
 
 	if not pocket:
 		raise HTTPException(
@@ -79,15 +86,59 @@ async def collect_pocket_payment(
 
 
 	pocket['txns'][str(user['_id'])] = ''
-	new_pocket_txns = pocket['txns']
+	new_pocket_txns = { "$set": {'txns': pocket['txns']} }
+
 
 	db['main']['pockets'].update_one(
 		{'generated_slug': slug},
-		{new_pocket_txns}
+		new_pocket_txns
 	)
 
 
-	celo_value_amount = pocket['celo_value_amount'] * 0.5
+	number_of_already_recipients = len(pocket['txns'])
+
+
+	a_b = (pocket['celo_value_amount'] / pocket['recipients_amount'])
+
+
+	time_delta = (datetime.datetime.now() - pocket['created_on_datetime'])
+	total_seconds = time_delta.total_seconds() + (240*60)
+	minutes = total_seconds / 60
+
+
+	print('minutes')
+	print(minutes)
+
+	celo_value_amount = a_b * (minutes / 60)
+
+
+	# if (number_of_already_recipients + 1) == (pocket['recipients_amount']):
+	# 	already_celo_value_amount = 0
+	# 	for k, v in pocket['txns'].items():
+	# 		already_celo_value_amount += 1
+	# 		pass
+
+
+
+	# celo_value_amount = pocket['celo_value_amount'] * 0.5
+
+	# rewards = {}
+
+	# for n in range(pocket_in.recipients_amount):
+	# 	rewards[n+1] = 
+
+
+	# pocket_in.rewards = {
+
+	# }
+
+	# A = total amount
+	# B = number of recipients
+
+	# Recipients 1 to (B-1) receive: A/B*minutes/60
+	# Last recipient receives A – Sum of Amounts of recipients 1 to (B-1).
+
+
 
 	try:
 		kit.wallet_change_account = settings.CELO_ADDRESS_2

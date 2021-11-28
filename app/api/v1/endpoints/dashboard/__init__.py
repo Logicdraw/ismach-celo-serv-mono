@@ -71,6 +71,21 @@ async def balance(
 
 
 
+@router.get(
+	'/leaderboard/{packet_slug}',
+)
+async def leaderboard_packet(
+	request: Request,
+	*,
+	db: MongoClient = Depends(deps.get_db),
+	user: Any = Depends(deps.get_current_active_user),
+) -> Any:
+	# --
+
+	pass
+
+
+
 
 
 

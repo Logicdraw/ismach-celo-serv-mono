@@ -60,6 +60,7 @@ async def test_collect_pocket_payment(
 		username=settings.USER_2_USERNAME,
 		password=settings.USER_2_PASSWORD.get_secret_value(),
 		celo_address=settings.CELO_ADDRESS_3,
+		active=True,
 	)
 
 	user = users_crud.create(
@@ -78,9 +79,11 @@ async def test_collect_pocket_payment(
 		'created_on_datetime': datetime.datetime.now(pytz.utc),
 	})
 
+	print('n1n1n1')
+
 
 	resp = await client.get(
-		f'{settings.API_V1_STR}/_reciever/collect/abc123',
+		f'{settings.API_V1_STR}/_receiver/collect/abc123',
 		headers=token_headers_user,
 	)
 

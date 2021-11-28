@@ -107,7 +107,8 @@ async def create_pocket(
 	print(tx_hash)
 
 	pocket_in.initial_txn = tx_hash
-	pocket_in.txns = []
+	pocket_in.txns = {}
+
 
 	pocket_in.created_on_datetime = datetime.datetime.now(pytz.utc)
 
