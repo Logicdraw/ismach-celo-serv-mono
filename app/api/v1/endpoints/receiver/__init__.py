@@ -175,7 +175,7 @@ async def collect_pocket_payment(
 
 
 	return {
-		'amount': celo_amount,
+		'amount': celo_value_amount,
 	}
 
 
