@@ -70,10 +70,9 @@ async def balance(
 
 
 
-
 @router.get(
 	'/packets/{slug}',
-	response_model=schemas.PocketSchema,
+	# response_model=schemas.PocketSchema,
 )
 async def read_packet(
 	request: Request,
@@ -95,7 +94,19 @@ async def read_packet(
 		)
 
 
-	return pocket
+	txns = []
+
+	for txn in pocket['txns'].values():
+		txns.append(txn)
+
+
+	return {
+		'celo_value_amount': pocket['celo_value_amount'],
+		'generated_slug': pocket['generated_slug'],
+		'created_on_datetime': pocket['created_on_datetime'],
+		'message': pocket['message'],
+		'txns': txns,
+	}
 
 
 
