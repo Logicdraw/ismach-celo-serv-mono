@@ -87,7 +87,7 @@ def get_current_active_user(
 ) -> Any:
 	# Current active user --
 
-	if not bool(current_user['is_active']):
+	if not bool(current_user['active']):
 		raise HTTPException(
 			status_code=400,
 			detail='Inactive user!',

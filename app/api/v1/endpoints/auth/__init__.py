@@ -77,7 +77,7 @@ async def login_access_token(
 			detail='Incorrect username or password!',
 		)
 
-	if not users_crud.is_active(user):
+	if not bool(user['active']):
 		raise HTTPException(
 			status_code=400,
 			detail='Inactive account!',
@@ -90,7 +90,7 @@ async def login_access_token(
 
 	return {
 		'access_token': create_access_token(
-			user.id,
+			str(user['_id']),
 			expires_delta=access_token_expires,
 		),
 		'token_type': 'bearer',
