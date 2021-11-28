@@ -24,6 +24,7 @@ class PocketSchemaBase(BaseModel):
 	txns: Optional[Dict[Any, Any]] = None # {user_id: txn_hash}
 	generated_slug: Optional[str] = None
 	created_on_datetime: Optional[datetime.datetime] = None
+	message: Optional[str] = None
 	# rewards: Optional[Any] = None
 
 
@@ -31,7 +32,7 @@ class PocketSchemaBase(BaseModel):
 class PocketSchemaCreate(
 	PocketSchemaBase,
 ):
-	user_id: str
+	pass
 
 
 class PocketSchemaUpdate(
