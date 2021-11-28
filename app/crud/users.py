@@ -44,12 +44,12 @@ class UsersCRUD:
 		self,
 		db: MongoClient,
 		*,
-		email: str,
+		username: str,
 	) -> Optional[Any]:
 		# --
 
 		user = db[MONGO_DB][UsersCRUD.collections_name].find_one({
-			{ "username": {"$regex": email.lower(), "$options":"i"} }
+			{ "username": {"$regex": username.lower(), "$options":"i"} }
 		})
 
 		return user
