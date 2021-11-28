@@ -44,10 +44,11 @@ class PocketSchemaUpdate(
 class PocketSchemaInDBBase(
 	PocketSchemaBase,
 ):
-	id: str
+	# id: str
+	pass
 
-	class Config:
-		fields = {'id': '_id'}
+	# class Config:
+	# 	fields = {'id': '_id'}
 
 
 

@@ -72,17 +72,30 @@ async def balance(
 
 
 @router.get(
-	'/leaderboard/{packet_slug}',
+	'/packets/{slug}',
+	response_model=schemas.PocketSchema,
 )
-async def leaderboard_packet(
+async def read_packet(
 	request: Request,
 	*,
 	db: MongoClient = Depends(deps.get_db),
 	user: Any = Depends(deps.get_current_active_user),
+	slug: str,
 ) -> Any:
 	# --
 
-	pass
+	pocket = db['main']['pockets'].find_one(
+		{'generated_slug': slug}
+	)
+
+	if not pocket:
+		raise HTTPException(
+			status_code=404,
+			detail='NOT FOUND!',
+		)
+
+
+	return pocket
 
 
 
