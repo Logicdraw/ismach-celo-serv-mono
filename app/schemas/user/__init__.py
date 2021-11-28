@@ -37,10 +37,11 @@ class UserSchemaUpdate(
 class UserSchemaInDBBase(
 	UserSchemaBase,
 ):
-	id: str
+	# id: str
 
 	class Config:
-		fields = {'id': '_id'}
+		# fields = {'id': '_id'}
+		pass
 
 
 
