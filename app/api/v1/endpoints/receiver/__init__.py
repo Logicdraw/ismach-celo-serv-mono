@@ -141,13 +141,19 @@ async def collect_pocket_payment(
 
 
 	try:
+		kit.wallet_gas_price = 500000000
+		# kit.wallet_add_new_key = settings.CELO_ADDRESS_PRIVATE_KEY_1.get_secret_value()
+		kit.wallet_add_new_key = settings.CELO_ADDRESS_PRIVATE_KEY_2.get_secret_value()
+		# kit.wallet.sign_with_provider = True
 		kit.wallet_change_account = settings.CELO_ADDRESS_2
 		celo_amount = kit.w3.toWei(celo_value_amount, 'ether')
 		tx_hash = gold_token.transfer(settings.CELO_ADDRESS_2, celo_amount)
-	except:
+	except Exception as err:
+		print('errrrr::')
+		print(err)
 		raise HTTPException(
 			status_code=500,
-			detail='Error sending payment',
+			detail='Error sending payment!',
 		)
 
 	

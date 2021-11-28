@@ -47,7 +47,7 @@ async def test_create_pocket(
 
 	data = {
 		'user_id': str(user['_id']),
-		'celo_value_amount': 1.0,
+		'celo_value_amount': 1.5,
 		'recipients_amount': 4,
 		'txns': {},
 	}

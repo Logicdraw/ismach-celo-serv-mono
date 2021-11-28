@@ -86,6 +86,10 @@ async def create_pocket(
 		)
 
 	try:
+		kit.wallet_gas_price = 500000000
+		kit.wallet_add_new_key = settings.CELO_ADDRESS_PRIVATE_KEY_1.get_secret_value()
+		# kit.wallet_add_new_key = settings.CELO_ADDRESS_PRIVATE_KEY_2.get_secret_value()
+		# kit.wallet.sign_with_provider = True
 		kit.wallet_change_account = settings.CELO_ADDRESS_1
 		print('1z')
 		celo_amount = kit.w3.toWei(pocket_in.celo_value_amount, 'ether')
