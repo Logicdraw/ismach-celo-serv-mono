@@ -127,6 +127,10 @@ class Settings(BaseSettings):
 
 
 
+	# 30 days!
+	ACCESS_TOKEN_EXPIRE_MINUTES: int = 30 * 24 * 60
+
+
 
 	SECRET_KEY: SecretStr = os.environ['SECRET_KEY']
 
