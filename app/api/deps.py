@@ -47,12 +47,15 @@ def get_db() -> Generator:
 
 
 
-def get_current_user(
+def _get_current_user(
 	db: MongoClient = Depends(get_db),
 	*,
 	token: str,
 ) -> Any:
 	# --
+	print('aaa!!')
+	print(token)
+
 	try:
 		payload = jwt.decode(
 			token,
@@ -60,7 +63,9 @@ def get_current_user(
 			algorithms=[ALGORITHM],
 		)
 		token_data = TokenSchemaPayload(**payload)
-	except (jwt.JWTError, ValidationError):
+	except (jwt.JWTError, ValidationError) as err:
+		print('YYY')
+		print(err)
 		raise HTTPException(
 			status_code=status.HTTP_403_FORBIDDEN,
 			detail='Could not validate credentials!',
@@ -79,6 +84,20 @@ def get_current_user(
 		)
 
 	return user
+
+
+def get_current_user(
+	db: MongoClient = Depends(get_db),
+	token: str = Depends(token_bearer),
+) -> Any:
+	# --
+
+	current_user = _get_current_user(
+		db=db,
+		token=token,
+	)
+
+	return current_user
 
 
 

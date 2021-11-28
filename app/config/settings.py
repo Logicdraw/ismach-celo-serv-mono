@@ -127,6 +127,39 @@ class Settings(BaseSettings):
 
 
 
+	MONGO_TESTING_DB: str
+	MONGO_TESTING_HOST: str
+	MONGO_TESTING_USER: str
+	MONGO_TESTING_PASSWORD: SecretStr
+
+	MONGO_TESTING_URI: Optional[str] = None
+
+	@validator(
+		'MONGO_TESTING_URI',
+		pre=True,
+	)
+	def assemble_mongo_testing_db_connection(
+		cls,
+		v: Optional[str],
+		values: Dict[str, Any],
+	) -> Any:
+		if isinstance(v, str):
+			return v
+		password: SecretStr = values.get('MONGO_TESTING_PASSWORD', SecretStr(''))
+		return '{scheme}://{user}:{password}@{host}/{db}?retryWrites=true&w=majority'.format(
+			scheme='mongodb+srv',
+			user=values.get('MONGO_TESTING_USER'),
+			password=password.get_secret_value(),
+			host=values.get('MONGO_TESTING_HOST'),
+			db=values.get('MONGO_TESTING_DB'),
+		)
+
+	MONGO_TESTING_MIN_CONNECTIONS_COUNT: Optional[int] = os.environ['MONGO_TESTING_MIN_CONNECTIONS_COUNT']
+	MONGO_TESTING_MAX_CONNECTIONS_COUNT: Optional[int] = os.environ['MONGO_TESTING_MAX_CONNECTIONS_COUNT']
+
+
+
+
 	# 30 days!
 	ACCESS_TOKEN_EXPIRE_MINUTES: int = 30 * 24 * 60
 

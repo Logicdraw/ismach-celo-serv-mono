@@ -96,7 +96,7 @@ class UsersCRUD:
 
 		inserted_user = db[MONGO_DB]['users'].insert_one(user_in)
 
-		user_in['id'] = inserted_user.inserted_id
+		user_in['_id'] = inserted_user.inserted_id
 
 		return user_in
 

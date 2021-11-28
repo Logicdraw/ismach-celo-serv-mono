@@ -37,36 +37,36 @@ async def mongo_conn_close():
 
 
 
-def create_initial_user(
-	mongo_client: MongoClient,
-	mongo_database_name: Optional[str] = None,
-) -> None:
-	# Mongo DB --
-	logger.info('Creating initial user...')
+# def create_initial_user(
+# 	mongo_client: MongoClient,
+# 	mongo_database_name: Optional[str] = None,
+# ) -> None:
+# 	# Mongo DB --
+# 	logger.info('Creating initial user...')
 
-	if mongo_database_name:
-		mongo_database = mongo_client.get_database(mongo_database_name)
-	else:
-		mongo_database = mongo_client.get_default_database()
+# 	if mongo_database_name:
+# 		mongo_database = mongo_client.get_database(mongo_database_name)
+# 	else:
+# 		mongo_database = mongo_client.get_default_database()
 
-	if 'users' in mongo_database.list_collection_names():
-		users_collection = mongo_database.get_collection('users')
-	else:
-		users_collection = mongo_database.create_collection('users')
-
-
-	user = {
-		'name': settings.FIRST_USER_ADMIN_NAME,
-		'email': settings.FIRST_USER_ADMIN_EMAIL,
-		'password_hash': get_password_hash(settings.FIRST_USER_ADMIN_PASSWORD.get_secret_value())
-	}
+# 	if 'users' in mongo_database.list_collection_names():
+# 		users_collection = mongo_database.get_collection('users')
+# 	else:
+# 		users_collection = mongo_database.create_collection('users')
 
 
-	users_collection.insert_one(user)
+# 	user = {
+# 		'name': settings.FIRST_USER_ADMIN_NAME,
+# 		'email': settings.FIRST_USER_ADMIN_EMAIL,
+# 		'password_hash': get_password_hash(settings.FIRST_USER_ADMIN_PASSWORD.get_secret_value())
+# 	}
 
-	logger.info('Done creating initial user!')
 
-	return None
+# 	users_collection.insert_one(user)
+
+# 	logger.info('Done creating initial user!')
+
+# 	return None
 
 
 
@@ -78,7 +78,7 @@ def init_database(
 	# --
 	logger.info('Initializing database...')
 	
-	create_initial_user(mongo_client, mongo_database_name)
+	# create_initial_user(mongo_client, mongo_database_name)
 
 	logger.info('Done initializing database!')
 

@@ -23,8 +23,46 @@ from asgi_lifespan import LifespanManager
 from httpx import AsyncClient
 
 
+from app.main import app
+
+
+from app.tests.utils.auth import (
+	authentication_token_from_username_user,
+)
+
+
+from app.database.testing.client import (
+	mongo_client_testing,
+)
+
+from app.database.helpers import (
+	reset_database,
+)
+
+
+from pymongo import MongoClient
 
 # --
+
+
+
+@pytest.fixture(scope='module')
+def connection():
+	# --
+
+	yield mongo_client_testing
+	mongo_client_testing.close()
+
+
+
+@pytest.fixture(scope='function')
+def db(connection):
+	# --
+
+	yield connection
+	reset_database(connection, mongo_database_name='main')
+
+
 
 
 
@@ -44,6 +82,19 @@ async def client():
 
 
 
+@pytest.fixture()
+async def token_headers_user(
+	db: MongoClient,
+	client: AsyncClient,
+) -> Dict[str, str]:
+	# --
 
+	username = settings.USER_1_USERNAME
+
+	return await authentication_token_from_username_user(
+		db=db,
+		client=client,
+		username=username,
+	)
 
 

@@ -31,6 +31,8 @@ from pydantic import (
 )
 
 
+from pymongo import MongoClient
+
 
 @pytest.mark.asyncio
 async def test_create_pocket(
@@ -44,23 +46,26 @@ async def test_create_pocket(
 	user = db['main']['users'].find_one({})
 
 	data = {
-		'user_id': int(user['_id']),
-		'celo_value_amount': 5.0,
+		'user_id': str(user['_id']),
+		'celo_value_amount': 1.0,
 		'recipients_amount': 4,
-		'initial_txt': None,
-		'txns': [],
+		'txns': {},
 	}
 
 	resp = await client.post(
 		f'{settings.API_V1_STR}/_sender/pockets',
-		headers=token_headers_user,
 		json=data,
+
+		headers=token_headers_user,
 	)
+
+	print('...!??')
+	print(resp.json())
 
 	assert resp.status_code == 200
 	result = resp.json()
 
-
+	assert True
 
 
 

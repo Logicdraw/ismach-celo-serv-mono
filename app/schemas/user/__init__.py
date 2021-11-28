@@ -17,6 +17,7 @@ class UserSchemaBase(BaseModel):
 	email: Optional[EmailStr] = None
 	username: Optional[str] = None
 	celo_address: Optional[str] = None
+	password: Optional[str] = None
 
 
 

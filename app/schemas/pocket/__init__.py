@@ -1,6 +1,7 @@
 from typing import (
 	Optional,
 	Any,
+	Dict,
 )
 
 from pydantic import (
@@ -20,7 +21,7 @@ class PocketSchemaBase(BaseModel):
 	celo_value_amount: Optional[float] = None
 	recipients_amount: Optional[int] = None
 	initial_txn: Optional[str] = None
-	txns: Optional[dict] = None # {user_id: txn_hash}
+	txns: Optional[Dict[Any, Any]] = None # {user_id: txn_hash}
 	generated_slug: Optional[str] = None
 	created_on_datetime: Optional[datetime.datetime] = None
 

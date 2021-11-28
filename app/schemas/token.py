@@ -10,6 +10,6 @@ class TokenSchema(BaseModel):
 
 
 class TokenSchemaPayload(BaseModel):
-	sub: Optional[int] = None
+	sub: Optional[str] = None
 
 

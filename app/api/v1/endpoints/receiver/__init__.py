@@ -58,7 +58,7 @@ async def collect_pocket_payment(
 	if not pocket:
 		raise HTTPException(
 			status_code=404,
-			detail='Coach not found!',
+			detail='Pocket not found!',
 		)
 
 	if str(user['_id']) in pocket['txns'].keys():
