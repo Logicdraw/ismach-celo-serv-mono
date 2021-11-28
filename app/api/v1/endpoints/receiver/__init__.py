@@ -71,10 +71,9 @@ async def collect_pocket_payment(
 
 	if str(user['_id']) in pocket['txns'].keys():
 		if bool(pocket['txns'][str(user['_id'])]):
-			raise HTTPException(
-				status_code=500,
-				detail='Collected payment already!',
-			)
+			return {
+				'amount': pocket['txns'][str(user['_id'])],
+			}
 
 
 	if len(pocket['txns']) >= pocket['recipients_amount']:
