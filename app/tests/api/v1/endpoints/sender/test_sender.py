@@ -41,7 +41,7 @@ async def test_create_pocket(
 	# --
 
 	# get user_id somehow...
-	user = db['main']['users'].find_one()
+	user = db['main']['users'].find_one({})
 
 	data = {
 		'user_id': int(user['_id']),

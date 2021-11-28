@@ -49,7 +49,7 @@ class UsersCRUD:
 		# --
 
 		user = db[MONGO_DB][UsersCRUD.collections_name].find_one({
-			{ "username": {"$regex": username.lower(), "$options":"i"} }
+			"username": {"$regex": username.lower(), "$options":"i"}
 		})
 
 		return user
