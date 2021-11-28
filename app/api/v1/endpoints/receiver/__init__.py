@@ -162,7 +162,7 @@ async def collect_pocket_payment(
 
 
 	return {
-		'msg': f'You have received {celo_value_amount} CELO! Txn: {tx_hash}',
+		'amount': celo_value_amount,
 	}
 
 
