@@ -165,7 +165,7 @@ async def collect_pocket_payment(
 		)
 
 	
-	pocket['txns'][str(user['_id'])] = tx_hash
+	pocket['txns'][str(user['_id'])] = celo_value_amount
 	new_pocket_txns = { "$set": {'txns': pocket['txns']} }
 
 

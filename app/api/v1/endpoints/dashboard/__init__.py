@@ -97,7 +97,7 @@ async def read_packet(
 	txns = []
 
 	for txn in pocket['txns'].values():
-		txns.append(txn)
+		txns.append('...')
 
 
 	return {
