@@ -12,7 +12,7 @@ kit.wallet_add_new_key = settings.CELO_ADDRESS_PRIVATE_KEY_2.get_secret_value()
 
 
 
-
+gold_token = kit.base_wrapper.create_and_get_contract_by_name('GoldToken')
 
 
 

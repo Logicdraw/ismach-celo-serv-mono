@@ -43,7 +43,7 @@ import datetime
 import pytz
 
 
-from app.utils.celo import kit
+from app.utils.celo import kit, gold_token
 
 
 
@@ -71,14 +71,40 @@ async def create_pocket(
 	# --
 
 	try:
-		kit.wallet_change_account = settings.CELO_ADDRESS_1
-		celo_amount = kit.w3.toWei(pocket_in.celo_value_amount, 'ether')
-		tx_hash = gold_token.transfer(settings.CELO_ADDRESS_1, celo_amount)
+		balance = gold_token.balance_of(settings.CELO_ADDRESS_1)
+		print(balance)
 	except:
 		raise HTTPException(
-			status=500,
+			status_code=500,
 			detail='Not working!',
 		)
+
+	if balance < kit.w3.toWei(pocket_in.celo_value_amount, 'ether'):
+		raise HTTPException(
+			status_code=500,
+			detail='Not enough balance!',
+		)
+
+	try:
+		kit.wallet_change_account = settings.CELO_ADDRESS_1
+		print('1z')
+		celo_amount = kit.w3.toWei(pocket_in.celo_value_amount, 'ether')
+		print('NNNN')
+		print(celo_amount)
+		print('2z')
+		tx_hash = gold_token.transfer(settings.CELO_ADDRESS_1, celo_amount)
+		print('3z')
+	except Exception as err:
+		print('ggg')
+		print(err)
+		print(type(err))
+		raise HTTPException(
+			status_code=500,
+			detail='Not working!',
+		)
+
+	print('tx_hash')
+	print(tx_hash)
 
 	pocket_in.initial_txn = tx_hash
 	pocket_in.txns = []
@@ -88,7 +114,7 @@ async def create_pocket(
 	slug = generator()
 	pocket_in.generated_slug = slug
 
-	db['main']['pockets'].insert_one(pocket_in.to_dict())
+	db['main']['pockets'].insert_one(pocket_in.dict())
 
 
 	return {

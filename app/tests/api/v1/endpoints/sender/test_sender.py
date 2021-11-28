@@ -55,7 +55,6 @@ async def test_create_pocket(
 	resp = await client.post(
 		f'{settings.API_V1_STR}/_sender/pockets',
 		json=data,
-
 		headers=token_headers_user,
 	)
 

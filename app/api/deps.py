@@ -31,6 +31,9 @@ from app.security import ALGORITHM
 from app.database.client import mongo_client
 
 
+from bson import ObjectId
+
+
 
 token_bearer = OAuth2PasswordBearer(
 	tokenUrl='/_auth/login/access-token',
@@ -71,9 +74,12 @@ def _get_current_user(
 			detail='Could not validate credentials!',
 		)
 
+	print('ZZZ')
+	print(token_data.sub)
+
 	user = db['main']['users'].find_one(
 		{
-			'_id': token_data.sub,
+			'_id': ObjectId(token_data.sub),
 		},
 	)
 

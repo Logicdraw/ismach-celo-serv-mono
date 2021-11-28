@@ -3,6 +3,7 @@ from fastapi import APIRouter
 
 from app.api.v1.endpoints import (
 	auth,
+	dashboard,
 	receiver,
 	sender,
 )
@@ -20,6 +21,12 @@ api_v1_router.include_router(
 	auth.router,
 	prefix='/_auth',
 	tags=['auth'],
+)
+
+api_v1_router.include_router(
+	dashboard.router,
+	prefix='/_dashboard',
+	tags=['dashboard'],
 )
 
 api_v1_router.include_router(

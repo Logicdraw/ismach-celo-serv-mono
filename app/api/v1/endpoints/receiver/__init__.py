@@ -8,6 +8,7 @@ from fastapi import (
 	APIRouter,
 	Depends,
 	Request,
+	HTTPException,
 )
 
 
@@ -34,7 +35,7 @@ router = APIRouter()
 
 
 
-from app.utils.celo import kit
+from app.utils.celo import kit, gold_token
 
 
 
