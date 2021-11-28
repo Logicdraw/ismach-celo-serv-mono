@@ -26,6 +26,9 @@ from app.extensions import limiter
 from pymongo import MongoClient
 
 
+import datetime
+
+
 
 router = APIRouter()
 
@@ -39,7 +42,7 @@ from app.utils.celo import kit
 @router.get(
 	'/collect/{slug}',
 )
-def collect_pocket_payment(
+async def collect_pocket_payment(
 	request: Request,
 	*,
 	db: MongoClient = Depends(deps.get_db),

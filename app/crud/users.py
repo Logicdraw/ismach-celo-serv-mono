@@ -40,7 +40,7 @@ class UsersCRUD:
 	collections_name: str = 'users'
 
 
-	def get_by_email(
+	def get_by_username(
 		self,
 		db: MongoClient,
 		*,
@@ -49,7 +49,7 @@ class UsersCRUD:
 		# --
 
 		user = db[MONGO_DB][UsersCRUD.collections_name].find_one({
-			{ "email": {"$regex": email.lower(), "$options":"i"} }
+			{ "username": {"$regex": email.lower(), "$options":"i"} }
 		})
 
 		return user
@@ -59,12 +59,12 @@ class UsersCRUD:
 		self,
 		db: MongoClient,
 		*,
-		email: str,
+		username: str,
 		password: str,
 	) -> Any:
 		# --
 
-		user = self.get_by_email(
+		user = self.get_by_username(
 			db=db,
 			email=email,
 		)

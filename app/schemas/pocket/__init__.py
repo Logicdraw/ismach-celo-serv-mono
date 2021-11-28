@@ -11,6 +11,8 @@ from pydantic import (
 )
 
 
+import datetime
+
 
 
 class PocketSchemaBase(BaseModel):
@@ -20,6 +22,7 @@ class PocketSchemaBase(BaseModel):
 	initial_txn: Optional[str] = None
 	txns: Optional[dict] = None # {user_id: txn_hash}
 	generated_slug: Optional[str] = None
+	created_on_datetime: Optional[datetime.datetime] = None
 
 
 

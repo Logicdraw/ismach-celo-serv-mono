@@ -56,7 +56,7 @@ router = APIRouter()
 	response_model=schemas.TokenSchema,
 )
 @limiter.limit('20/minute')
-def login_access_token(
+async def login_access_token(
 	request: Request,
 	*,
 	db: MongoClient = Depends(deps.get_db),
@@ -66,7 +66,7 @@ def login_access_token(
 
 	user = users_crud.authenticate(
 		db=db,
-		email=form_data.username,
+		username=form_data.username,
 		password=form_data.password,
 	)
 
@@ -74,7 +74,7 @@ def login_access_token(
 	if not user:
 		raise HTTPException(
 			status_code=400,
-			detail='Incorrect email or password!',
+			detail='Incorrect username or password!',
 		)
 
 	if not users_crud.is_active(user):

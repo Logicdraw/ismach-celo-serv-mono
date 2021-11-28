@@ -38,8 +38,14 @@ import string
 import random
 
 
+import datetime
+
+import pytz
+
 
 from app.utils.celo import kit
+
+
 
 
 
@@ -53,9 +59,9 @@ def generator(size=8, chars=string.ascii_uppercase + string.ascii_lowercase + st
 
 
 @router.post(
-	'/pockets-test',
+	'/pockets',
 )
-def create_pocket_test(
+async def create_pocket(
 	request: Request,
 	*,
 	db: MongoClient = Depends(deps.get_db),
@@ -75,6 +81,9 @@ def create_pocket_test(
 		)
 
 	pocket_in.initial_txn = tx_hash
+	pocket_in.txns = []
+
+	pocket_in.created_on_datetime = datetime.datetime.now(pytz.utc)
 
 	slug = generator()
 	pocket_in.generated_slug = slug
