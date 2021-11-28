@@ -147,7 +147,7 @@ async def collect_pocket_payment(
 		# kit.wallet.sign_with_provider = True
 		kit.wallet_change_account = settings.CELO_ADDRESS_2
 		celo_amount = kit.w3.toWei(celo_value_amount, 'ether')
-		tx_hash = gold_token.transfer(settings.CELO_ADDRESS_2, celo_amount)
+		tx_hash = gold_token.transfer(user['celo_address'], celo_amount)
 	except Exception as err:
 		print('errrrr::')
 		print(err)

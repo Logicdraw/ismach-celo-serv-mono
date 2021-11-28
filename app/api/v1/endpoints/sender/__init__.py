@@ -96,7 +96,7 @@ async def create_pocket(
 		print('NNNN')
 		print(celo_amount)
 		print('2z')
-		tx_hash = gold_token.transfer(settings.CELO_ADDRESS_1, celo_amount)
+		tx_hash = gold_token.transfer(settings.CELO_ADDRESS_2, celo_amount)
 		print('3z')
 	except Exception as err:
 		print('ggg')
