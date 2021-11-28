@@ -103,7 +103,7 @@ async def read_packet(
 	return {
 		'celo_value_amount': pocket['celo_value_amount'],
 		'generated_slug': pocket['generated_slug'],
-		'created_on_datetime': pocket['created_on_datetime'],
+		# 'created_on_datetime': pocket['created_on_datetime'],
 		'message': pocket['message'],
 		'txns': txns,
 	}
